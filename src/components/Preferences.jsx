@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import "./preferences.css";
 
 const Preferences = (props) => {
     //get Categories
