@@ -31,7 +31,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<StartPage/>} />
-        <Route path='/Preferences' element={<Preferences categories={categories} data={data} setdata={setData} categoriesData={categoriesData}  />} />
+        <Route path='/Preferences' element={<Preferences categories={categories} data={data} setData={setData} categoriesData={categoriesData}  />} />
       </Routes>
     </>
   );

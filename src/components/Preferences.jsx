@@ -5,6 +5,7 @@ const Preferences = (props) => {
     //get Categories
   const getCategories = (
     <select
+      name="category" 
       onChange={handleData}
       value={props.data.category} 
     >
