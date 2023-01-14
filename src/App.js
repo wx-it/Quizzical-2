@@ -2,13 +2,15 @@ import {useState, useEffect} from "react";
 import { Route, Routes, Link } from "react-router";
 import { nanoid } from "nanoid";
 import StartPage from "./components/StartPage";
-import Preferences from "./components/Preferences";
+import Preferences from "./components/preferences/Preferences";
+import Quiz from "./components/Quiz";
 
 function App() {
-
+  
+  const [categories, setCategories] = useState([])
+  const [questions, setQuestions] = useState([])
 
   //get Categories
-  const [categories, setCategories] = useState([])
   useEffect(()=>{
     categoriesData()
   }, [])
@@ -26,12 +28,26 @@ function App() {
     difficulty: ''
 })
 
+//get questions
+useEffect(()=>{
+  dataQuestions()
+},[])
+
+
+const dataQuestions = async() =>{
+    const fetchData = await fetch(`https://opentdb.com/api.php?amount=10&category=${data.category}&difficulty=${data.difficulty}&type=multiple`)
+    const response = await fetchData.json()
+    const questionsData = response.results
+    setQuestions(prevQuestions => questionsData)
+  }
+
 
   return (
     <>
       <Routes>
         <Route path="/" element={<StartPage/>} />
-        <Route path='/Preferences' element={<Preferences categories={categories} data={data} setData={setData} categoriesData={categoriesData}  />} />
+        <Route path='/Preferences' element={<Preferences categories={categories} data={data} setData={setData} />} />
+        <Route path='/Quiz' element={<Quiz questions={questions} />} />
       </Routes>
     </>
   );

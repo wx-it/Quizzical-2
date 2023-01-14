@@ -1,22 +1,8 @@
-import { Link } from 'react-router-dom'
-import "./preferences.css";
+import { Link } from "react-router-dom"
 
-const Preferences = (props) => {
-    //get Categories
-  const getCategories = (
-    <select
-      name="category" 
-      onChange={handleData}
-      value={props.data.category} 
-    >
-        <option default>Select a Category</option>
-            {props.categories.map(category=>(
-                <option key={category.id} > {category.name} </option>
-            ))}
-    </select>
-  )
+const SubmitForm = (props) => {
 
-  //get data onChange
+     //get data onChange
   function handleData(e){
     const{name, value, type, checked} = e.target
     props.setData(prevData =>{
@@ -24,23 +10,20 @@ const Preferences = (props) => {
              ...prevData,
              [name] : type === 'checkbox' ? checked : value
     }})
+
 }
 
 function handleSubmit(e){
     e.preventDefault()
     props.setData(data => data)
 }
-  
-    return (
-        <div className='start-form'>
-        <div className='start-form-content'>
-           <h1>Quizzical</h1>
-           <p>Pick your preference to start</p>
+
+
+  return (
     <div>
- 
-         <form 
-          className='form-container' 
-          onSubmit={handleSubmit} 
+        <form 
+        className='form-container' 
+        onSubmit={handleSubmit} 
         >
             <input 
             type="text" 
@@ -49,10 +32,23 @@ function handleSubmit(e){
             value={props.data.name}  
             onChange={handleData} 
             />
+            
+            <select 
+            name="category" 
+            id="" 
+            value={props.data.category}  
+            onChange={handleData}
+            >
+                <option default>Select a category</option>
+            
+                {
+                props.categories.map((category)=>(
+                        <option key={category.id} value={category.id}>{category.name}</option>
+                    )
+                )}
+            </select>
 
-        {getCategories}
-
-        <select 
+            <select 
             name="difficulty"
             id=""
             value={props.data.difficulty}
@@ -68,9 +64,7 @@ function handleSubmit(e){
 
         </form>
     </div>
-        </div>
-       </div>
   )
 }
 
-export default Preferences
+export default SubmitForm
