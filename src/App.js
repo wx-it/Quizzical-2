@@ -1,9 +1,15 @@
+import {useState, useEffect} from "react";
+import { Route, Routes, Link } from "react-router";
+import { nanoid } from "nanoid";
+import StartPage from "./components/StartPage";
 
 function App() {
   return (
-    <div className="App">
-      <h1>hi ._.</h1>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<StartPage/>} />
+      </Routes>
+    </>
   );
 }
 
